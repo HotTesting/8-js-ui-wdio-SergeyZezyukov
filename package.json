@@ -4,7 +4,7 @@
   "description": "First Auto QA Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "wdio wdio.conf.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,6 @@
     "@wdio/spec-reporter": "^5.12.1",
     "@wdio/sync": "^5.12.3",
     "chromedriver": "^76.0.0",
-    "wdio-chromedriver-service": "^5.0.2",
-    "webdriverio": "^5.12.1"
+    "wdio-chromedriver-service": "^5.0.2"
   }
 }
