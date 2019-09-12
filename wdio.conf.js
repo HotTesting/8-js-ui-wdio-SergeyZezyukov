@@ -1,3 +1,4 @@
+require('ts-node').register({ files: true });
 exports.config = {
     //
     // ====================
@@ -9,7 +10,11 @@ exports.config = {
     runner: 'local',
     //
     // Override default path ('/wd/hub') for chromedriver service.
-    path: '/',
+    //Where selenium standalone or chrome driver started
+    // hostname: 'localhost',
+    // port: 4444,
+     path: '/wd/hub',
+    
     //
     // ==================
     // Specify Test Files
@@ -20,7 +25,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/homework3.js'
+        './test/specs/homework4.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -91,7 +96,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://ip-5236.sunline.net.ua:38015',
+    baseUrl: 'http://ip-5236.sunline.net.ua:38015/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -124,7 +129,7 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
     reporters: ['spec'],
-    
+ 
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -194,13 +199,14 @@ exports.config = {
      * afterEach in Mocha)
      */
     // afterHook: function () {
-    // },
+    // }, 
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
      * @param {Object} test test details
      */
-    // afterTest: function (test) {
+    // afterTest: function(test) {
     // },
+
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
