@@ -27,7 +27,7 @@ describe("Order", function() {
         checkout.customerDetails.setDataToCustomeDetails();
 
         const orderSuccess = new OrderSuccess();
-
+        
         expect(orderSuccess.successMassage()).to.include('is successfully completed!');
    });
 

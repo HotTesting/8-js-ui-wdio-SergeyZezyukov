@@ -11,8 +11,12 @@ export class ProductsDetails {
     }
 
     addToCart() {
+        const currentItemsInCart = this.header.headerCart.getQuantity();
         $('button[name="add_cart_product"]').click();
-        browser.pause(2000);
+        browser.waitUntil(() => { 
+            return this.header.headerCart.getQuantity() > currentItemsInCart;
+        }, null, `Expected items in cart to be changed. 
+        Current items: ${this.header.headerCart.getQuantity()} items before ${currentItemsInCart}`);
     }
 
     getProductName() {
@@ -51,6 +55,6 @@ export class ProductsDetails {
             return this.getProductPrice() + 100;
         }
         return this.getProductPrice();
-        browser.pause(5000);
+        
     }
 }

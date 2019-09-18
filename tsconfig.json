@@ -1,5 +1,6 @@
-{ 
-    "compilerOptions": {
+{
+    "compilerOptions": { 
+        "outDir": "./build",
         "allowJs": true,
         "types": [
             "node",

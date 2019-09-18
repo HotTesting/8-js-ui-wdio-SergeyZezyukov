@@ -20,7 +20,7 @@ export class Checkout {
 
     open() {
         browser.url('/checkout');
-        browser.pause(2000);
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
     }
 }
 
@@ -86,62 +86,73 @@ class CustomerDetails {
         this.setEmail();
         this.setPhone();
         this.saveChanges();
+        //browser.pause(2000);
         this.confirmOrder();
-
+        //browser.pause(2000);
     }
 
     setCompany() {
-        return $('.address input[name="company"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="company"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setTax() {
-        return $('.address input[name="tax_id"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="tax_id"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     } 
     
     setFirstName() {
-        return $('.address input[name="firstname"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="firstname"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     }
     
     setLastname() {
-        return $('.address input[name="lastname"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="lastname"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setAddress1() {
-        return $('.address input[name="address1"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="address1"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setAddress2() {
-        return $('.address input[name="address2"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="address2"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setPostCode() {
-        return $('.address input[name="postcode"]').setValue(`${Math.floor(Math.random() * 100) + 100000}`);
+        return this.container.$('.address input[name="postcode"]')
+        .setValue(`${Math.floor(Math.random() * 100) + 100000}`);
     }
 
     setCity() {
-        return $('.address input[name="city"]').setValue(`${Math.random().toString(36).substring(7)}`);
+        return this.container.$('.address input[name="city"]')
+        .setValue(`${Math.random().toString(36).substring(7)}`);
     }
     
     setEmail() {
-        let mail = $('.address input[name="email"]');
+        let mail = this.container.$('.address input[name="email"]');
         mail.click();
         mail.clearValue();
         return mail.setValue(`moderngk.c${new Date().getTime() / 1000}@list.ru`);
     }
 
     setPhone() {
-        return $('.address input[name="phone"]').setValue(`+7${parseInt(Math.random()*100*15*14784874)}`);
+        return this.container.$('.address input[name="phone"]')
+        .setValue(`+7${parseInt(Math.random()*100*15*14784874)}`);
     }
 
     saveChanges() {
-        $('button.btn[name="save_customer_details"]').click();
-        browser.pause(3000);
+        const btnSaveChanges = this.container.$('button.btn[name="save_customer_details"]');
+        btnSaveChanges.click();
+        browser.waitUntil(() => {
+            return btnSaveChanges.getAttribute('disabled')        
+        }, null, 'The saving changes is not successfull');
     }
 
     confirmOrder() {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
         $('button.btn[name="confirm_order"]').click();       
     }
-
-    
-
 }

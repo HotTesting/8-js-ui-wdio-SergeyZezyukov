@@ -3,15 +3,15 @@ import { Footer } from './components/footer';
 
 export class OrderSuccess {
     get container() {
-        return $('#content');
+        return $('#box-order-success');
     }
 
     header = new Header();
     footer = new Footer();
 
     successMassage() {
-        if($('h1.title')) {
-            return $('h1.title').getText();
+        if(this.container.$('h1.title')) {
+            return this.container.$('h1.title').getText();
         } else {
             return false;
         }
