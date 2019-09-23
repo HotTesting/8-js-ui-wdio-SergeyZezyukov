@@ -86,65 +86,55 @@ class CustomerDetails {
         this.setEmail();
         this.setPhone();
         this.saveChanges();
-        //browser.pause(2000);
         this.confirmOrder();
-        //browser.pause(2000);
+
     }
 
     setCompany() {
-        return this.container.$('.address input[name="company"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="company"]').setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setTax() {
-        return this.container.$('.address input[name="tax_id"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="tax_id"]').setValue(`${Math.random().toString(36).substring(7)}`);
     } 
     
     setFirstName() {
-        return this.container.$('.address input[name="firstname"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="firstname"]').setValue(`${Math.random().toString(36).substring(7)}`);
     }
     
     setLastname() {
-        return this.container.$('.address input[name="lastname"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="lastname"]').setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setAddress1() {
-        return this.container.$('.address input[name="address1"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="address1"]').setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setAddress2() {
-        return this.container.$('.address input[name="address2"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="address2"]').setValue(`${Math.random().toString(36).substring(7)}`);
     }
 
     setPostCode() {
-        return this.container.$('.address input[name="postcode"]')
-        .setValue(`${Math.floor(Math.random() * 100) + 100000}`);
+        return $('.address input[name="postcode"]').setValue(`${Math.floor(Math.random() * 100) + 100000}`);
     }
 
     setCity() {
-        return this.container.$('.address input[name="city"]')
-        .setValue(`${Math.random().toString(36).substring(7)}`);
+        return $('.address input[name="city"]').setValue(`${Math.random().toString(36).substring(7)}`);
     }
     
     setEmail() {
-        let mail = this.container.$('.address input[name="email"]');
+        let mail = $('.address input[name="email"]');
         mail.click();
         mail.clearValue();
         return mail.setValue(`moderngk.c${new Date().getTime() / 1000}@list.ru`);
     }
 
     setPhone() {
-        return this.container.$('.address input[name="phone"]')
-        .setValue(`+7${parseInt(Math.random()*100*15*14784874)}`);
+        return $('.address input[name="phone"]').setValue(`+7${parseInt(Math.random()*100*15*14784874)}`);
     }
 
     saveChanges() {
-        const btnSaveChanges = this.container.$('button.btn[name="save_customer_details"]');
+        const btnSaveChanges = $('button.btn[name="save_customer_details"]');
         btnSaveChanges.click();
         browser.waitUntil(() => {
             return btnSaveChanges.getAttribute('disabled')        

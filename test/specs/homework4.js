@@ -17,8 +17,8 @@ describe("Order", function() {
         product.addToCart();
 
         const checkout = new Checkout();
-        checkout.open('checkout');
-        checkout.isItemsInCart();
+        checkout.open();
+        expect(checkout.isItemsInCart()).to.be.true;
 
         let productPriceInCart = checkout.shoppingCart.items[0].getProductPrice();
 
@@ -27,7 +27,7 @@ describe("Order", function() {
         checkout.customerDetails.setDataToCustomeDetails();
 
         const orderSuccess = new OrderSuccess();
-        
+
         expect(orderSuccess.successMassage()).to.include('is successfully completed!');
    });
 
@@ -39,8 +39,8 @@ describe("Order", function() {
         product.addToCart();
 
         const checkout = new Checkout();
-        checkout.open('checkout');
-        checkout.isItemsInCart();
+        checkout.open();
+        expect(checkout.isItemsInCart()).to.be.true;
 
         let productPriceInCart = checkout.shoppingCart.items[0].getProductPrice();
 
@@ -69,8 +69,8 @@ describe("Order", function() {
         product.addToCart();
 
         const checkout = new Checkout();
-        checkout.open('checkout');
-        checkout.isItemsInCart();
+        checkout.open();
+        expect(checkout.isItemsInCart()).to.be.true;
 
         let item = checkout.shoppingCart.items[0];
         let productPriceInCart = item.getProductPrice();
@@ -92,8 +92,8 @@ describe("Order", function() {
         product.addToCart();
 
         const checkout = new Checkout();
-        checkout.open('checkout');
-        checkout.isItemsInCart();
+        checkout.open();
+        expect(checkout.isItemsInCart()).to.be.true;
 
         let productsPrice = checkout.shoppingCart.items.map(item => {
             return item.getProductPrice();
@@ -119,8 +119,8 @@ describe("Order", function() {
         product.addToCart();
 
         const checkout = new Checkout();
-        checkout.open('checkout');
-        checkout.isItemsInCart();
+        checkout.open();
+        expect(checkout.isItemsInCart()).to.be.true;
 
         let item = checkout.shoppingCart.items[0];
         let productPriceInCart = item.getProductPrice();

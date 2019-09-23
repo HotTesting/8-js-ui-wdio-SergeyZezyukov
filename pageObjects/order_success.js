@@ -3,7 +3,7 @@ import { Footer } from './components/footer';
 
 export class OrderSuccess {
     get container() {
-        return $('#box-order-success');
+        return $('#content');
     }
 
     header = new Header();
