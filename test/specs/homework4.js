@@ -2,6 +2,7 @@ import { ProductsDetails } from '../../pageObjects/productDetails';
 import { Checkout } from '../../pageObjects/checkout';
 import { OrderSuccess } from '../../pageObjects/order_success';
 import { expect } from 'chai';
+import { assert } from 'chai';
 
 describe("Order", function() {  
     
@@ -24,11 +25,11 @@ describe("Order", function() {
 
         expect(productPriceInCart).to.equal(productPrice);
 
-        checkout.customerDetails.setDataToCustomeDetails();
+        checkout.customerDetails.setDataAndConfirmOrder();
 
         const orderSuccess = new OrderSuccess();
 
-        expect(orderSuccess.successMassage()).to.include('is successfully completed!');
+        expect(orderSuccess.successMessage()).to.include('is successfully completed!');
    });
 
     it("is successful for discounted item", function() {
@@ -46,10 +47,10 @@ describe("Order", function() {
 
         expect(productPriceInCart).to.not.equal(producDiscountPrice);
 
-        checkout.customerDetails.setDataToCustomeDetails();
+        checkout.customerDetails.setDataAndConfirmOrder();
 
         const orderSuccess = new OrderSuccess();
-        expect(orderSuccess.successMassage()).to.have.string('is successfully completed!');
+        expect(orderSuccess.successMessage()).to.have.string('is successfully completed!');
     });
 
     it("is successful for sold out item", function() {
@@ -58,7 +59,17 @@ describe("Order", function() {
         product.open('rubber-ducks-c-1/purple-duck-p-5');
         let status = product.getStatus();
         expect(status == 'Temporary Sold Out').to.be.true;
-        product.isButtonActiveAddToCart();
+        expect(product.isButtonActiveAddToCart()).to.be.true;
+        product.addToCart();
+
+        const checkout = new Checkout();
+        checkout.open();
+        expect(checkout.isItemsInCart()).to.be.true;
+
+        checkout.customerDetails.setDataAndConfirmOrder();
+
+        const orderSuccess = new OrderSuccess();
+        expect(orderSuccess.successMessage()).to.have.string('is successfully completed!');
     });
 
     it("is successful for 2 same items in card", function() {
@@ -80,7 +91,10 @@ describe("Order", function() {
 
         expect('$' + productPriceInCart * quantity).to.equal(productSum);
 
-        checkout.customerDetails.setDataToCustomeDetails();
+        checkout.customerDetails.setDataAndConfirmOrder();
+
+        const orderSuccess = new OrderSuccess();
+        expect(orderSuccess.successMessage()).to.have.string('is successfully completed!');
     });
 
     it("is successful for 2 different items in card", function() {
@@ -106,7 +120,10 @@ describe("Order", function() {
         let subTotal = checkout.shoppingCart.getSubTotal();
 
         expect('$' + productsPriceSum).to.equal(subTotal);
-        checkout.customerDetails.setDataToCustomeDetails();        
+        checkout.customerDetails.setDataAndConfirmOrder();    
+        
+        const orderSuccess = new OrderSuccess();
+        expect(orderSuccess.successMessage()).to.have.string('is successfully completed!');
     });
 
     it("is successful for items with parameters", function() {
@@ -129,6 +146,9 @@ describe("Order", function() {
         expect(productPriceInCart).to.equal(sizeProduct);
         expect('Size: ' + size).to.equal(optionProduct);
 
-        checkout.customerDetails.setDataToCustomeDetails();
+        checkout.customerDetails.setDataAndConfirmOrder();
+
+        const orderSuccess = new OrderSuccess();
+        expect(orderSuccess.successMessage()).to.have.string('is successfully completed!');
     });
 });

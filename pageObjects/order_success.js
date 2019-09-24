@@ -9,7 +9,7 @@ export class OrderSuccess {
     header = new Header();
     footer = new Footer();
 
-    successMassage() {
+    successMessage() {
         if(this.container.$('h1.title')) {
             return this.container.$('h1.title').getText();
         } else {

@@ -36,11 +36,8 @@ export class ProductsDetails {
     }
 
     isButtonActiveAddToCart() {
-        if($('.btn[name="add_cart_product"]').isEnabled()) {
-            return console.log('Button is not active because duck is sold');
-        } else {
-            return false;
-        }
+        return $('.btn[name="add_cart_product"]')
+        .waitForEnabled(1000, false, "Button is not active.");           
     }
 
     changeSize(size) {
@@ -57,4 +54,4 @@ export class ProductsDetails {
         return this.getProductPrice();
         
     }
-}
+} 
